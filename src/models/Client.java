@@ -1,17 +1,31 @@
 package models;
-import exceptions.numberInvalid;
 
+import exceptions.ResponseInvalid;
 
-public class Client {
+public class Client implements Comparable {
+	private int id_customer = 0;
 	private String cpf_cnpj;
 	private String nm_customer;
 	private int is_active;
-	private double vl_total;
+	private double vl_total = 0;
 
-	public Client(String cpf_cnpj, String nm_customer, int is_active, double vl_total) {
+	public Client() {
+		super();
+	}
+
+	public Client(int id_customer, String cpf_cnpj, String nm_customer, int is_active, double vl_total) {
+		this.id_customer = id_customer;
 		this.cpf_cnpj = cpf_cnpj;
 		this.nm_customer = nm_customer;
 		this.is_active = is_active;
+		this.vl_total = vl_total;
+	}
+
+	public Client(int id_customer, String cpf_cnpj, String nm_customer, String is_active, double vl_total) {
+		this.id_customer = id_customer;
+		this.cpf_cnpj = cpf_cnpj;
+		this.nm_customer = nm_customer;
+		this.setIs_active(is_active);
 		this.vl_total = vl_total;
 	}
 
@@ -35,15 +49,22 @@ public class Client {
 		return is_active;
 	}
 
-	public void setIs_active(int is_active) {
+	public void setIs_active(String is_active) {
 		try {
-			if (is_active == 1 || is_active == 0) {
-				this.is_active = is_active;
+			if (is_active.equalsIgnoreCase("yes")) {
+
+				this.is_active = 1;
+
+			} else if (is_active.equalsIgnoreCase("no")) {
+
+				this.is_active = 0;
+
 			} else {
-				throw new numberInvalid();
+
+				throw new ResponseInvalid();
 			}
-		} catch (numberInvalid e) {
-			e.toString("The value for the active client can only be one or zero!");
+		} catch (ResponseInvalid e) {
+			e.toString("The value informed is invalid, please type 'yes' or 'no'");
 		}
 	}
 
@@ -53,6 +74,29 @@ public class Client {
 
 	public void setVl_total(double vl_total) {
 		this.vl_total = vl_total;
+	}
+
+	public int getId_customer() {
+		return id_customer;
+	}
+
+	public void setId_customer(int id_customer) {
+		this.id_customer = id_customer;
+	}
+
+	// Method implemented by Comparable interface
+	public int compareTo(Object oClient) {
+		// Basically, everytime we return one, it'll sort base on the return 1 , -1 and
+		// 0
+		if (this.vl_total < ((Client) oClient).getVl_total()) {
+			// When 1 is returned, the object this.Client should go after the oClient
+			return 1;
+		}
+		if (this.getVl_total() > ((Client) oClient).getVl_total()) {
+			return -1;
+		}
+		// If they'r equal, we return 0
+		return 0;
 	}
 
 }
