@@ -9,10 +9,10 @@ import javax.swing.JOptionPane;
 public class ConnectionDB {
 	private static Connection connection;
 	private static String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	private static String USER = "sa";
-	private static String PASSWORD = "root";
-	private static String URL = "jdbc:sqlserver://localhost;"+
-	"databaseName=intern_valemobi;"+"user="+USER+";password="+PASSWORD+";";
+	private static String USER = "clientdb322";
+	private static String PASSWORD = "11051998!";
+	private static String URL = "jdbc:sqlserver://den1.mssql1.gear.host;"+
+	"databaseName=clientdb322;"+"user="+USER+";password="+PASSWORD+";";
 	
 	
 	public ConnectionDB() {}

@@ -23,7 +23,6 @@ public class Main {
 		try {
 
 			// Loop to input all clients desired to insert into the database
-			op = JOptionPane.showInputDialog("Do you wish to add more clients?");
 			while (!op.equalsIgnoreCase("no")) {
 				client = getInputs();
 				clients.add(client);
